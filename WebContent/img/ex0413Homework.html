@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<style>
+img{position:absolute;}
+</style>
+<script>
+	var i=0;
+	var state=true;//증감인지 감소인지 판별하는 변수 true=증가 false=감소.
+	var btnClickState=true; //레이어 움직이기 버튼 클릭전 true,클릭중 false;
+	
+ function imgMoveState(){
+	 if(btnClickState){
+		 st=setInterval('imgMove()',1)//0.001
+		 btnClickState=false;
+	 }else{alert("이미 실행중입니다.")}
+ }
+ function imgMove() {
+	 if(i<0){//음수
+	 	state=true;
+	 document.getElementById("img").src="img/tiger.gif";
+	 }else if(i>300){
+		 state=false;
+		 document.getElementById("img").src="img/mokey.gif";
+	 }
+	 
+	 if(state) i++;
+	 else i--;
+	 
+	 document.getElementById("img").style.left=i+"px";
+	
+}
+ function imgStopstate() {
+	clearTimeout(st);
+	btnClickState=true;
+}
+</script>
+</head>
+<body>
+<form name="f">
+ <input type="button" name="startimg" value="움직이기" onclick="imgMoveState()"/>
+ <input type="button" name="stopimg" value="멈추기" onclick="imgStopstate()"><br><br>
+ <img src="img/tiger.gif" />
+ <img src="img/mokey.gif" />
+</form>
+</body>
+</html>
